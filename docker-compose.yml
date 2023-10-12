@@ -1,0 +1,33 @@
+version: '3'
+services:
+
+    mosquitto:
+      image: eclipse-mosquitto
+      container_name: mosquitto
+      ports:
+        - "1885:1883"
+        - "9001:9001"
+      volumes:
+        - ./src/mosquitto/mosquitto.conf:/mosquitto/config/mosquitto.conf
+      restart: always
+    
+    pythoninterpreter:
+      image: arthurcadore/python_interpreter:mqtt
+      container_name: pythoninterpreter
+      restart: always
+      volumes:
+        - "./src/python/scripts:/scripts/"
+        - "./src/python/mainScript.sh:/mainScript.sh"
+      command: sh -c "chmod +x /mainScript.sh && ./mainScript.sh"
+      depends_on:
+        - database
+
+    database:
+      container_name: database
+      build:
+        context: ./src/database/ 
+      ports:
+        - "3320:3306"
+      environment:
+        MYSQL_ROOT_PASSWORD: cadore#dbmqtt
+
