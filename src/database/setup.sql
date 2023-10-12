@@ -13,8 +13,8 @@ CREATE TABLE luminosidade (
 );
 
 
-CREATE USER 'pythonConnector'@'%' IDENTIFIED BY 'Python@connect123';
+CREATE USER 'yourUser'@'%' IDENTIFIED BY 'Your#Password';
 
-GRANT ALL PRIVILEGES ON currentTS.* TO 'pythonConnector'@'%';
+GRANT ALL PRIVILEGES ON currentTS.* TO 'yourUser'@'%';
 
 FLUSH PRIVILEGES;
