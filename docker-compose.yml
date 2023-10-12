@@ -12,13 +12,10 @@ services:
       restart: always
     
     pythoninterpreter:
-      image: arthurcadore/python_interpreter:mqtt
       container_name: pythoninterpreter
+      build:
+        context: ./src/python
       restart: always
-      volumes:
-        - "./src/python/scripts:/scripts/"
-        - "./src/python/mainScript.sh:/mainScript.sh"
-      command: sh -c "chmod +x /mainScript.sh && ./mainScript.sh"
       depends_on:
         - database
 
