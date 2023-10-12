@@ -2,8 +2,8 @@ import mysql.connector
 import paho.mqtt.client as mqtt
 
 db_host = "database"
-db_user = "pythonConnector"
-db_password = "Python@connect123"
+db_user = "yourUser"
+db_password = "Your#Password"
 db_database = "currentTS"
 
 mqtt_broker = "mosquitto"
