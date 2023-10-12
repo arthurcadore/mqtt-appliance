@@ -5,8 +5,8 @@ services:
       image: eclipse-mosquitto
       container_name: mosquitto
       ports:
-        - "1885:1883"
-        - "9001:9001"
+        - "1883:1883"
+        # - "9001:9001"
       volumes:
         - ./src/mosquitto/mosquitto.conf:/mosquitto/config/mosquitto.conf
       restart: always
@@ -24,7 +24,7 @@ services:
       build:
         context: ./src/database/ 
       ports:
-        - "3320:3306"
+        - "3306:3306"
       environment:
         MYSQL_ROOT_PASSWORD: cadore#dbmqtt
 
