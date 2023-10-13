@@ -14,6 +14,9 @@ COPY ./src/ /project/
 # Instale as dependências usando npm
 RUN npm install mysql2 express mysql ejs
 
-# Comando para iniciar a aplicação quando o contêiner for iniciado
-CMD ["node", "app.js"]
+# Dê permissões de execução ao script
+RUN chmod +x script.sh
+
+# Especifique o comando CMD como uma string JSON no formato de array
+CMD ["./script.sh"]
 
