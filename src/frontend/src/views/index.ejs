@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dados de Temperatura e Luminosidade</title>
+</head>
+<body>
+    <h1>Dados de Temperatura:</h1>
+    <ul>
+        <% temperaturaData.forEach(temperatura => { %>
+            <li><%= temperatura.mensagem %> - <%= temperatura.data_insercao %></li>
+        <% }); %>
+    </ul>
+
+    <h1>Dados de Luminosidade:</h1>
+    <ul>
+        <% luminosidadeData.forEach(luminosidade => { %>
+            <li><%= luminosidade.mensagem %> - <%= luminosidade.data_insercao %></li>
+        <% }); %>
+    </ul>
+</body>
+</html>
+

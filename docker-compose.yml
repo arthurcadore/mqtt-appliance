@@ -28,3 +28,10 @@ services:
       environment:
         MYSQL_ROOT_PASSWORD: cadore#dbmqtt
 
+    mqttfront:
+      container_name: mqttfront
+      build:
+        context: ./src/frontend/
+      ports:
+        - "80:3000"
+      restart: always
