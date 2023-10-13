@@ -4,21 +4,66 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dados de Temperatura e Luminosidade</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 <body>
-    <h1>Dados de Temperatura:</h1>
-    <ul>
-        <% temperaturaData.forEach(temperatura => { %>
-            <li><%= temperatura.mensagem %> - <%= temperatura.data_insercao %></li>
-        <% }); %>
-    </ul>
+    <h1>Gráfico de Temperatura:</h1>
+    <canvas id="temperaturaChart" width="400" height="200"></canvas>
 
-    <h1>Dados de Luminosidade:</h1>
-    <ul>
-        <% luminosidadeData.forEach(luminosidade => { %>
-            <li><%= luminosidade.mensagem %> - <%= luminosidade.data_insercao %></li>
-        <% }); %>
-    </ul>
+    <h1>Gráfico de Luminosidade:</h1>
+    <canvas id="luminosidadeChart" width="400" height="200"></canvas>
+
+    <script>
+        fetch('/dados/temperatura')
+            .then(response => response.json())
+            .then(data => {
+                const ctx = document.getElementById('temperaturaChart').getContext('2d');
+                new Chart(ctx, {
+                    type: 'line',
+                    data: {
+                        labels: data.map(item => item.data_insercao),
+                        datasets: [{
+                            label: 'Temperatura',
+                            data: data.map(item => item.mensagem),
+                            borderColor: 'rgba(255, 99, 132, 1)',
+                            borderWidth: 1
+                        }]
+                    },
+                    options: {
+                        scales: {
+                            y: {
+                                beginAtZero: true
+                            }
+                        }
+                    }
+                });
+            });
+
+        fetch('/dados/luminosidade')
+            .then(response => response.json())
+            .then(data => {
+                const ctx = document.getElementById('luminosidadeChart').getContext('2d');
+                new Chart(ctx, {
+                    type: 'line',
+                    data: {
+                        labels: data.map(item => item.data_insercao),
+                        datasets: [{
+                            label: 'Luminosidade',
+                            data: data.map(item => item.mensagem),
+                            borderColor: 'rgba(255, 206, 86, 1)',
+                            borderWidth: 1
+                        }]
+                    },
+                    options: {
+                        scales: {
+                            y: {
+                                beginAtZero: true
+                            }
+                        }
+                    }
+                });
+            });
+    </script>
 </body>
 </html>
 
