@@ -23,10 +23,10 @@ function createConnection() {
   // Adiciona um evento de erro para evitar que o programa pare devido a erros não tratados
   connection.on('error', (err) => {
     console.error('Erro no banco de dados: ' + err.message);
-    // Se ocorrer um erro na conexão, tenta reconectar a cada 1 segundo
+    // Se ocorrer um erro na conexão, tenta reconectar a cada 10 segundos
     setTimeout(() => {
       createConnection();
-    }, 1000);
+    }, 10000);
   });
 
   return connection;
