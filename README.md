@@ -44,8 +44,8 @@ Once the containers are up and running, you can publish and store to the topics 
 For example, to publish a message in `temperatura` and `luminosidade` (default) topic, use the command below: 
 
 ```
-mosquitto_pub -h <MQTT_SERVER> -p <MQTT_port> -t temperatura -m "22°C"
-mosquitto_pub -h <MQTT_SERVER> -p <MQTT_port> -t lumunosidade -m "3000K"
+mosquitto_pub -h <MQTT_SERVER> -p <MQTT_port> -t temperatura -m "22"
+mosquitto_pub -h <MQTT_SERVER> -p <MQTT_port> -t lumunosidade -m "3000"
 ```
 
 To use `mosquito_pub` command remeber to install the repectively applications on your system. 
