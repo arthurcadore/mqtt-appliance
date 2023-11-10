@@ -52,6 +52,9 @@ services:
     ports:
       # Mapeia a porta do host 3000 para porta 3300 do container
       - "3000:3000"
+    volumes:
+      # Mapeia os arquivos de configuração
+      - ./src/backend/MqttBroker:/project
     restart: always
     depends_on:
       - database
