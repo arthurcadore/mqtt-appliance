@@ -1,39 +1,57 @@
+# Authors: Arthur Cadore M. Barcella
+#          Deivid Fortinato Frederico
+#          Matheus Pires Salazar
+#          Rhenzo Hideki S. Kajikawa
+# PJI2 - Projeto Integrador 2 IFSC-SJ
+
 version: '3'
 services:
-
-    mosquitto:
-      image: eclipse-mosquitto:2.0.18
-      container_name: mosquitto
-      ports:
-        - "1883:1883"
-        # - "9001:9001"
-      volumes:
-        - ./src/mosquitto/mosquitto.conf:/mosquitto/config/mosquitto.conf
-      restart: always
-    
-    pythoninterpreter:
-      container_name: pythoninterpreter
-      build:
-        context: ./src/python
-      restart: always
-      depends_on:
-        - database
-
-    database:
-      container_name: database
-      build:
-        context: ./src/database/ 
-      ports:
-        - "3306:3306"
-      environment:
-        MYSQL_ROOT_PASSWORD: cadore#dbmqtt
-
-    mqttfront:
-      container_name: mqttfront
-      build:
-        context: ./src/frontend/
-      ports:
-        - "80:3000"
-      restart: always
-      depends_on:
-        - database
+  #----------------------------------------------------------------------------
+  # Serviço do mosquitto 
+  mosquitto:
+    image: eclipse-mosquitto:2.0.18
+    container_name: mosquitto
+    ports:
+      # Mapeia a portas 1883 do host para porta 1883 do container
+      - "1883:1883"
+      # - "9001:9001"
+    volumes:
+      # Mapeia os arquivos de configuração
+      - ./src/mosquitto/mosquitto.conf:/mosquitto/config/mosquitto.conf
+    restart: always
+  #----------------------------------------------------------------------------
+  # Serviço para um interpretador Python
+  pythoninterpreter:
+    container_name: pythoninterpreter
+    build:
+      # Constroi a imagem a partir desse contexto local 
+      context: ./src/python
+    restart: always
+    depends_on:
+      - database
+  #----------------------------------------------------------------------------
+  # Serviço para um Database 
+  database:
+    container_name: database
+    build:
+      # Constroi a imagem a partir desse contexto local 
+      context: ./src/database/
+    ports:
+      # Mapeia a porta do host 3306 para porta 3306 do container
+      - "3306:3306"
+    environment:
+      # Define a senha do root do MySQL
+      MYSQL_ROOT_PASSWORD: cadore#dbmqtt
+  #----------------------------------------------------------------------------
+  # Serviço para uma aplicação WEB
+  mqttfront:
+    container_name: mqttfront
+    build:
+      # Constroi a imagem a partir desse contexto local 
+      context: ./src/frontend/
+    ports:
+      # Mapeia a porta do host 80 para porta 3300 do container
+      - "80:3000"
+    restart: always
+    depends_on:
+      - database

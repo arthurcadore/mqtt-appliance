@@ -1,3 +1,9 @@
+# Authors: Arthur Cadore M. Barcella
+#          Deivid Fortinato Frederico
+#          Matheus Pires Salazar
+#          Rhenzo Hideki S. Kajikawa
+# PJI2 - Projeto Integrador 2 IFSC-SJ
+
 FROM mysql:8.0.34
 
 # Configurações do banco de dados
