@@ -43,15 +43,15 @@ services:
       # Define a senha do root do MySQL
       MYSQL_ROOT_PASSWORD: cadore#dbmqtt
   #----------------------------------------------------------------------------
-  # # Serviço para uma aplicação WEB
-  # mqttbackend:
-  #   container_name: mqttbackend
-  #   build:
-  #     # Constroi a imagem a partir desse contexto local 
-  #     context: ./src/backend/
-  #   ports:
-  #     # Mapeia a porta do host 3000 para porta 3300 do container
-  #     - "3000:3000"
-  #   restart: always
-  #   depends_on:
-  #     - database
+  # Serviço para uma aplicação WEB
+  mqttbackend:
+    container_name: mqttbackend
+    build:
+      # Constroi a imagem a partir desse contexto local 
+      context: ./src/backend/
+    ports:
+      # Mapeia a porta do host 3000 para porta 3300 do container
+      - "3000:3000"
+    restart: always
+    depends_on:
+      - database
