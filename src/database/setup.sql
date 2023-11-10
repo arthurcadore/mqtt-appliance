@@ -41,10 +41,10 @@ CREATE TABLE relelamp (
 );
 
 
---Cria um novo usuário
+-- Cria um novo usuário
 CREATE USER 'yourUser'@'%' IDENTIFIED BY 'Your#Password';
 
---Concede o usuário todos os privilégios
+-- Concede o usuário todos os privilégios
 GRANT ALL PRIVILEGES ON currentTS.* TO 'yourUser'@'%';
 
 -- Atualiza os privilégios
