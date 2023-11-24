@@ -95,7 +95,64 @@ app.get('/dados/luminosidade', (req, res) => {
   });
 });
 
-// Outras rotas e código aqui...
+// Rota para fornecer dados de corrente 
+app.get('/dados/corrente', (req, res) => {
+  const queryCorrente = 'SELECT * FROM currentTS.corrente';
+
+  connection.query(queryCorrente, (error, results) => {
+    if (error) {
+      console.error('Erro ao executar a consulta de corrente: ' + error.message);
+      res.status(500).json({ error: 'Erro interno do servidor' });
+      return;
+    }
+
+    // Converter mensagens em valores numéricos
+    const correnteData = results.map(item => {
+      return {
+        ...item,
+        mensagem: parseFloat(item.mensagem) // Converte a mensagem para número
+      };
+    });
+
+    res.json(correnteData);
+  });
+});
+
+// Rota para controlar rele do ar condicionado (releac)
+// 0 para desligar e 1 para ligar o ar condicionado, na table releac
+// utiliza-se o PUT para escrever 1 ou 0 no banco de dados. 
+app.put('/releac/:status', (req, res) => {
+  const status = req.params.status;
+  const queryReleac = `UPDATE currentTS.releac SET status = ${status}`;
+
+  connection.query(queryReleac, (error, results) => {
+    if (error) {
+      console.error('Erro ao executar a consulta de releac: ' + error.message);
+      res.status(500).json({ error: 'Erro interno do servidor' });
+      return;
+    }
+
+    res.json({ status });
+  });
+});
+
+// Rota para controlar rele da lampada (relelamp)
+// 0 para desligar e 1 para ligar a lampada, na table relelamp
+// utiliza-se o PUT para escrever 1 ou 0 no banco de dados.
+app.put('/relelamp/:status', (req, res) => {
+  const status = req.params.status;
+  const queryRelelamp = `UPDATE currentTS.relelamp SET status = ${status}`;
+
+  connection.query(queryRelelamp, (error, results) => {
+    if (error) {
+      console.error('Erro ao executar a consulta de relelamp: ' + error.message);
+      res.status(500).json({ error: 'Erro interno do servidor' });
+      return;
+    }
+
+    res.json({ status });
+  });
+});
 
 app.listen(port, () => {
   console.log(`Servidor rodando na porta ${port}`);
