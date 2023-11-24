@@ -118,43 +118,55 @@ app.get('/dados/corrente', (req, res) => {
   });
 });
 
-// Rota para controlar rele do ar condicionado (releac)
-// 0 para desligar e 1 para ligar o ar condicionado, na table releac
-// utiliza-se o PUT para escrever 1 ou 0 no banco de dados. 
-app.put('/releac/:status', (req, res) => {
-  const status = req.params.status;
-  const queryReleac = `UPDATE currentTS.releac SET status = ${status}`;
 
-  connection.query(queryReleac, (error, results) => {
+// Rota para fornecer dados de releac
+app.get('/dados/releac/:valor', (req, res) => {
+  const valorReleac = req.params.valor;
+
+  // Verificar se o valor é válido (deve ser "0" ou "1")
+  if (valorReleac !== "0" && valorReleac !== "1") {
+    res.status(400).json({ error: 'Valor inválido para releac. Deve ser 0 ou 1.' });
+    return;
+  }
+
+  // Construir a consulta SQL para inserir um novo registro na tabela
+  const queryInsertReleac = `INSERT INTO currentTS.releac (mensagem) VALUES (${valorReleac})`;
+
+  connection.query(queryInsertReleac, (error, results) => {
     if (error) {
-      console.error('Erro ao executar a consulta de releac: ' + error.message);
+      console.error('Erro ao executar a inserção de releac: ' + error.message);
       res.status(500).json({ error: 'Erro interno do servidor' });
       return;
     }
 
-    res.json({ status });
+    res.json({ success: true });
   });
 });
 
-// Rota para controlar rele da lampada (relelamp)
-// 0 para desligar e 1 para ligar a lampada, na table relelamp
-// utiliza-se o PUT para escrever 1 ou 0 no banco de dados.
-app.put('/relelamp/:status', (req, res) => {
-  const status = req.params.status;
-  const queryRelelamp = `UPDATE currentTS.relelamp SET status = ${status}`;
+// Rota para fonrnecer dados do relelamp
+app.get('/dados/relelamp/:valor', (req, res) => {
+  const valorRelelamp = req.params.valor;
 
-  connection.query(queryRelelamp, (error, results) => {
+  // Verificar se o valor é válido (deve ser "0" ou "1")
+  if (valorRelelamp !== "0" && valorRelelamp !== "1") {
+    res.status(400).json({ error: 'Valor inválido para relelamp. Deve ser 0 ou 1.' });
+    return;
+  }
+
+  // Construir a consulta SQL para inserir um novo registro na tabela
+  const queryInsertRelelamp = `INSERT INTO currentTS.relelamp (mensagem) VALUES (${valorRelelamp})`;
+
+  connection.query(queryInsertRelelamp, (error, results) => {
     if (error) {
-      console.error('Erro ao executar a consulta de relelamp: ' + error.message);
+      console.error('Erro ao executar a inserção de relelamp: ' + error.message);
       res.status(500).json({ error: 'Erro interno do servidor' });
       return;
     }
 
-    res.json({ status });
+    res.json({ success: true });
   });
 });
 
 app.listen(port, () => {
   console.log(`Servidor rodando na porta ${port}`);
 });
-

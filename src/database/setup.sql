@@ -19,10 +19,12 @@ CREATE TABLE corrente (
 );
 
 CREATE TABLE releac (
+            id INT AUTO_INCREMENT PRIMARY KEY,
             mensagem TEXT,
 );
 
-CREATE TABLE relelump (
+CREATE TABLE relelamp (
+            id INT AUTO_INCREMENT PRIMARY KEY,
             mensagem TEXT,
 );
 
