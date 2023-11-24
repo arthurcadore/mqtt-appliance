@@ -12,6 +12,21 @@ CREATE TABLE luminosidade (
             data_insercao TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
+CREATE TABLE corrente (
+            id INT AUTO_INCREMENT PRIMARY KEY,
+            mensagem TEXT,
+            data_insercao TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+CREATE TABLE releac (
+            mensagem TEXT,
+);
+
+CREATE TABLE relelump (
+            mensagem TEXT,
+);
+
+
 
 CREATE USER 'yourUser'@'%' IDENTIFIED BY 'Your#Password';
 
