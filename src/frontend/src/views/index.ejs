@@ -43,13 +43,13 @@
   }
 
   document.getElementById("ligarLuz").onclick = () => {
-    fetch("/dados/relelamp/0", {
+    fetch("/dados/relelamp/1", {
       method: "GET"
     });
   }
 
   document.getElementById("desligarLuz").onclick = () => {
-    fetch("/dados/relelamp/1", {
+    fetch("/dados/relelamp/0", {
       method: "GET"
     });
   }
