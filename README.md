@@ -1,4 +1,4 @@
-# MQTTBroker (Mosquitto) with MySQL  
+# MQTTBroker (Mosquitto) with MySQL DB and Frontend Board
 
 ### Author: Arthur Cadore M. Barcella
 ### Network Training Analyst at Intelbras
