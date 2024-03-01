@@ -1,4 +1,4 @@
-# MQTTBroker (Mosquitto) with MySQL DB and Frontend Board
+# MQTT (Mosquitto) with MySQL DB and Frontend Board Applianec
 
 This project uses Docker Containers to host MQTT Broker and integration with MySQL DB with Frontend App. 
 Follow the steps below to set up and run the application after pulling the latest changes from this respository.
